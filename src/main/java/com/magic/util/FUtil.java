@@ -13,4 +13,5 @@ public class FUtil {
         MagicInfo bean = FUtil.getBean(MagicInfo.class);
         System.out.println(bean.getKey());
     }
+
 }
