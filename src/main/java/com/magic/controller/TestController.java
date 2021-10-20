@@ -36,6 +36,12 @@ public class TestController extends BaseController {
         return JSONObject.parseObject(hget.toString(), MagicInfo.class);
     }
 
+    @GetMapping("hgetTest")
+    public MagicInfo hgetTest(String key, String field){
+        Object hget = redisService.hget(key, field);
+        return JSONObject.parseObject(hget.toString(), MagicInfo.class);
+    }
+
     @GetMapping("hset")
     public String hset(String key, String field){
         redisService.hset(key, field);
