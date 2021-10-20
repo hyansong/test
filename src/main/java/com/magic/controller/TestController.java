@@ -1,10 +1,12 @@
 package com.magic.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.magic.base.BaseController;
 import com.magic.bean.DoorStateInfo;
 import com.magic.bean.JT808KGpsData;
 import com.magic.bean.MagicUserInfo;
 import com.magic.bean.TruckStat;
+import com.magic.handler.DealFactory;
 import com.magic.service.KafkaService;
 import com.magic.service.MongoService;
 import com.magic.service.RedisService;
@@ -17,7 +19,7 @@ import java.time.Instant;
 import java.util.List;
 
 @RestController
-public class TestController {
+public class TestController extends BaseController {
 
     @Autowired
     private MongoService mongoService;
@@ -44,6 +46,12 @@ public class TestController {
     public String testRed(){
         redisService.publish();
         return "SUCCESS";
+    }
+
+    @GetMapping("deal")
+    public String testDeal(Integer type){
+        DealFactory.get(type).execute();
+        return SUCCESS;
     }
 
     @GetMapping("product")
